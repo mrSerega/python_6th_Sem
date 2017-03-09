@@ -10,10 +10,16 @@ al.add_edge(2,3)
 al.add_edge(1,3)
 al.add_edge(0,2)
 
+pos = [(1,1),(2,2),(3,3),(4,4)]
+
 al.print_lists()
-graph = nx.Graph()
+
+al.remove_edge(0)
+
+al.print_lists()
+graph = nx.DiGraph()
 al.make_norm_graph(graph)
 graph.nodes()
 
-nx.draw(graph)
+nx.draw_networkx(graph,with_labels=True)
 plt.show()

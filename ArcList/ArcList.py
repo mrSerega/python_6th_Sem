@@ -24,9 +24,29 @@ def add_edge(left, right):
         H[left] = count
         count+=1
 
+def remove_edge(index):
+    it_left = H[I[index]]
+    it_right = H[J[index]]
+    if it_left == index: 
+        H[it_left] = L[H[it_left]]
+    else:
+        while(L[it_left]!=index):
+            it_left = L[it_left]
+            if it_left == -1: return
+        L[it_left] = L[L[it_left]] 
+    if it_right == index: 
+        H[it_right] = L[H[it_right]]
+    else:
+        while(L[it_right]!=index):
+            it_right = L[it_right]
+            if it_right == -1: return
+        L[it_right] = L[L[it_right]] 
+
 def print_lists():
     print(I)
     print(J)
+    print(H)
+    print(L)
 
 def make_norm_graph(G):
     G.clear()
