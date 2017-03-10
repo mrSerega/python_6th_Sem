@@ -1,7 +1,7 @@
-import networkx as nx
-import matplotlib.pyplot as plt
+import networkx as nx #this is a lib
+import matplotlib.pyplot as plt #this is a lib
 
-import ArcList as al
+import ArcList as al #this is a class
 
 myGraph = al.Arclist(4 , [0,1,2,1,0], [1,2,3,3,2])
 myGraph.remove_edge(0)
