@@ -1,58 +1,65 @@
-I = [] #
-J = [] #
-H = [] #heads
-L = [] #links
+class Arclist:
 
-count = 0
+	I = [] #arc start
+	J = [] #arc end
+	H = [] #heads
+	L = [] #links
+	free = []
 
-def set_num_of_nodes(num):
-    for i in range(num):
-         H.append(-1)
+	count = 0
 
-def add_edge(left, right):
-    global count #cause python
-    I.append(left)
-    J.append(right)
-    L.append(-1)
-    it = H[left]
-    if it!=-1:
-        while(L[it]!=-1):
-            it = L[it]
-        L[it]=count
-        count+=1
-    else:
-        H[left] = count
-        count+=1
+	def __init__(self, num, i_list, j_list):
+		self.set_num_of_nodes(num)
+		for i in range(len(i_list)):
+			self.add_edge(i_list[i],j_list[i])
 
-def remove_edge(index):
-    it_left = H[I[index]]
-    it_right = H[J[index]]
-    if it_left == index: 
-        H[it_left] = L[H[it_left]]
-    else:
-        while(L[it_left]!=index):
-            it_left = L[it_left]
-            if it_left == -1: return
-        L[it_left] = L[L[it_left]] 
-    if it_right == index: 
-        H[it_right] = L[H[it_right]]
-    else:
-        while(L[it_right]!=index):
-            it_right = L[it_right]
-            if it_right == -1: return
-        L[it_right] = L[L[it_right]] 
+	def set_num_of_nodes(self, num):
+		for i in range(num):
+			self.H.append(-1)
 
-def print_lists():
-    print(I)
-    print(J)
-    print(H)
-    print(L)
+	def add_edge(self, left, right):
+		if len(self.free) == 0:
+			self.I.append(left)
+			self.J.append(right)
+			self.L.append(self.H[left])
+			self.H[left]=len(self.L)-1
+		else:
+			self.I[free[0]]=left
+			self.J[free[0]]=right
+			self.L[free[0]]=self.H[left]
+			self.H[left]=self.free[0]
+			self.free.pop(0)
 
-def make_norm_graph(G):
-    G.clear()
-    for i in range(len(H)):
-        G.add_node(i)
-        it = H[i]
-        while(it!=-1):
-            G.add_edge(I[it],J[it])
-            it = L[it]
+	def remove_edge(self, index):
+		self.free.append(index)
+		it_left = self.H[self.I[index]]
+		it_right = self.H[self.J[index]]
+		if it_left == index: 
+			self.H[it_left] = self.L[self.H[it_left]]
+		else:
+			while(self.L[it_left]!=index):
+				it_left = self.L[it_left]
+				if it_left == -1: return
+			self.L[it_left] = self.L[self.L[it_left]] 
+		if it_right == index: 
+			self.H[it_right] = self.L[self.H[it_right]]
+		else:
+			while(self.L[it_right]!=index):
+				it_right = self.L[it_right]
+				if it_right == -1: return
+			self.L[it_right] = self.L[self.L[it_right]] 
+
+	def print_lists(self):
+		print(self.I)
+		print(self.J)
+		print(self.H)
+		print(self.L)
+
+	def make_norm_graph(self, G):
+		G.clear()
+		for i in range(len(self.H)):
+			G.add_node(i)
+			it = self.H[i]
+			while(it!=-1):
+				G.add_edge(self.I[it],self.J[it])
+				it = self.L[it]
