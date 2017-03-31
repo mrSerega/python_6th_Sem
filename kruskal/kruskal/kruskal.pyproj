@@ -6,7 +6,7 @@
     <ProjectGuid>e80ecf10-6d25-47a1-a62d-cbd181531620</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>kruskal.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,7 +25,13 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="kruskal.py" />
+    <Compile Include="bad_kruskal.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="good_kruskal.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="main.py" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="{2af0f10d-7135-4994-9156-5d01c9c11b7e}\2.7" />
