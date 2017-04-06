@@ -5,6 +5,7 @@ def good_kruskal(arcs, number_of_nodes, parents = [], result = []):
 	cost = 0
 
 	numbers = []
+	old = []
 
 	arcs.sort()
 	
@@ -12,7 +13,10 @@ def good_kruskal(arcs, number_of_nodes, parents = [], result = []):
 		parents.append(-1)
 		result.append(-1)
 		numbers.append(i)
+		old.append(0)
 
+
+	
 
 	for arc in arcs:
 		first_parent = find(arc[1], parents)
@@ -21,9 +25,10 @@ def good_kruskal(arcs, number_of_nodes, parents = [], result = []):
 		#print 'parent of',arc[1],'is', first_parent
 		#print 'parent of', arc[2], 'is', second_parent
 		
-		if first_parent != second_parent:
+		if first_parent != second_parent and old[arc[2]]==0:
 			union(first_parent,arc[2], parents)
 			union(arc[1],arc[2],result)
+			old[arc[2]] =1
 
 	#print numbers
 	print parents
